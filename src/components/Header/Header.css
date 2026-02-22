@@ -1,12 +1,15 @@
 .header-component {
   display: flex;
-  gap: 100px;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .header-component .search-input-wrapper {
   position: relative;
-  width: 400px;
+  flex: 1 1 320px;
+  min-width: 120px;
+  max-width: 480px;
 }
 
 .header-component .search-icon {
@@ -48,10 +51,31 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  flex: 1;
+  min-width: 0;
+  justify-content: flex-end;
 }
 
 .back-link {
   display: flex;
   align-items: center;
   gap: 5px;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 768px) {
+  .header-component {
+    gap: 12px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .header-component .search-input-wrapper {
+    flex: 1 1 100%;
+    max-width: none;
+  }
 }
