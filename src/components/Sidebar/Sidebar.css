@@ -3,14 +3,32 @@
   left: 0;
   top: 0;
   height: 100%;
-  width: 200px;
+  width: 250px;
   background-color: #ffffff;
   padding: 20px 20px 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-component h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #070715;
+  margin-bottom: 70px;
+  padding-left: 20px;
 }
 
 .sidebar-component ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sidebar-component li:last-child {
+  margin-top: auto;
 }
 
 .sidebar-component a {
