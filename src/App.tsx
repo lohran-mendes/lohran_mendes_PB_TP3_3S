@@ -1,12 +1,14 @@
-import "./App.css";
 import { Sidebar } from "./components/Sidebar";
+import "./App.css";
 
 function App() {
   return (
-    <>
+    <div className="app-layout">
       <Sidebar />
-      <h1>hello world</h1>
-    </>
+      <main>
+        <h1>Nome do Curso</h1>
+      </main>
+    </div>
   );
 }
 
