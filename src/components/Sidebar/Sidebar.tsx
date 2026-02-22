@@ -4,7 +4,7 @@ import gearIcon from "../../assets/icons/gear.svg?raw";
 import graduationHatIcon from "../../assets/icons/graduation-hat.svg?raw";
 import logoutIcon from "../../assets/icons/logout.svg?raw";
 import bookIcon from "../../assets/icons/book.svg?raw";
-import searchIcon from "../../assets/icons/search.svg?raw";
+import coursesSearchIcon from "../../assets/icons/courses.svg?raw";
 
 export function Sidebar() {
   return (
@@ -46,7 +46,7 @@ export function Sidebar() {
             <span
               className="sidebar-icon"
               aria-hidden="true"
-              dangerouslySetInnerHTML={{ __html: searchIcon }}
+              dangerouslySetInnerHTML={{ __html: coursesSearchIcon }}
             />
             Available courses
           </a>
