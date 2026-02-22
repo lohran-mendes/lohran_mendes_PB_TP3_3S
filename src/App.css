@@ -17,6 +17,31 @@ h1 {
   margin-bottom: 16px;
 }
 
+.app-layout .course-summary {
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.app-layout .course-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.app-layout .course-summary b,
+.app-layout .course-summary strong {
+  font-weight: 700;
+}
+
+.app-layout .course-summary ul,
+.app-layout .course-summary ol {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.app-layout .course-summary a {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 p {
   margin-bottom: 16px;
 }
