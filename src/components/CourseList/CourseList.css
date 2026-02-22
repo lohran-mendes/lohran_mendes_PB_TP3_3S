@@ -1,0 +1,40 @@
+.course-list h1 {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.course-list .course-summary {
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.course-list .course-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.course-list .course-summary b,
+.course-list .course-summary strong {
+  font-weight: 700;
+}
+
+.course-list .course-summary ul,
+.course-list .course-summary ol {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.course-list .course-summary a {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.course-list p {
+  margin-bottom: 16px;
+}
+
+.course-list .course-cards-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 70px;
+}
