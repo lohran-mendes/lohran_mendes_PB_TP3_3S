@@ -1,7 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
 import type { ApiResponse } from "../../interfaces/api.interface";
 import "./CourseList.css";
-import { CourseCard } from "../CourseCard";
+import { Card } from "../CourseCard";
 
 type CoursesProps = {
   courses: ApiResponse[];
@@ -26,7 +26,7 @@ export function CourseList(props: CoursesProps) {
               course.videos.length > 0 &&
               course.videos
                 .slice(0, 8)
-                .map((video) => <CourseCard key={video.id} lesson={video} />)}
+                .map((video) => <Card key={video.id} lesson={video} />)}
           </div>
         </Fragment>
       ))}

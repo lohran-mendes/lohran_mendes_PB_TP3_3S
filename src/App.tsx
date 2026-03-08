@@ -9,6 +9,7 @@ import type {
   VideoLesson,
 } from "./interfaces/api.interface";
 import { CourseList } from "./components/CourseList";
+import { AvailableCourseList } from "./components/availableCourseList";
 
 function App() {
   const API_URL: string = "https://api.tvmaze.com/shows";
@@ -84,6 +85,7 @@ function App() {
       <Header />
       <Sidebar />
       <main>
+        <AvailableCourseList course={courses}/>
         <CourseList courses={courses} />
       </main>
     </div>

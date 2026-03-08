@@ -1,0 +1,11 @@
+.available-course-list h1 {
+	font-weight: 600;
+	margin-bottom: 16px;
+}
+
+.available-course-list .available-course-cards-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 20px;
+	margin-bottom: 70px;
+}
