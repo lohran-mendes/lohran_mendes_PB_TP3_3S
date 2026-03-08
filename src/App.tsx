@@ -123,7 +123,6 @@ function App() {
             element={
               <>
                 <AvailableCourseList course={courses} />
-                <CourseList courses={courses} />
               </>
             }
           />
