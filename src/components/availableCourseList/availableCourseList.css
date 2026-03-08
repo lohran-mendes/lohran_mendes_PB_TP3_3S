@@ -9,3 +9,9 @@
 	gap: 20px;
 	margin-bottom: 70px;
 }
+
+.available-course-list .available-course-card-link {
+	color: inherit;
+	display: block;
+	text-decoration: none;
+}

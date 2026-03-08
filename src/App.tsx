@@ -3,6 +3,7 @@ import "./App.css";
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components/Header";
 import { useEffect, useState } from "react";
+import { Route, Routes, useSearchParams } from "react-router-dom";
 import type {
   ApiResponse,
   RawShow,
@@ -11,9 +12,38 @@ import type {
 import { CourseList } from "./components/CourseList";
 import { AvailableCourseList } from "./components/availableCourseList";
 
+type SelectedCoursePageProps = {
+  courses: ApiResponse[];
+  isLoading: boolean;
+};
+
+function SelectedCoursePage(props: SelectedCoursePageProps) {
+  const { courses, isLoading } = props;
+  const [searchParams] = useSearchParams();
+  const courseIdParam = searchParams.get("courseId");
+  const selectedCourseId = Number(courseIdParam);
+
+  if (isLoading) {
+    return <p>Loading course...</p>;
+  }
+
+  if (!courseIdParam || Number.isNaN(selectedCourseId)) {
+    return <p>Você ainda não salvou nenhum curso para a sua lista de favoritos.</p>;
+  }
+
+  const selectedCourse = courses.find((course) => course.id === selectedCourseId);
+
+  if (!selectedCourse) {
+    return <p>Course not found.</p>;
+  }
+
+  return <CourseList courses={[selectedCourse]} />;
+}
+
 function App() {
   const API_URL: string = "https://api.tvmaze.com/shows";
   const [courses, setCourses] = useState<ApiResponse[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toApiResponse = (item: RawShow): ApiResponse | null => {
     if (typeof item.id !== "number" || typeof item.name !== "string") {
@@ -74,6 +104,8 @@ function App() {
         setCourses(normalizedCourses);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -85,8 +117,25 @@ function App() {
       <Header />
       <Sidebar />
       <main>
-        <AvailableCourseList course={courses}/>
-        <CourseList courses={courses} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <AvailableCourseList course={courses} />
+                <CourseList courses={courses} />
+              </>
+            }
+          />
+          <Route
+            path="/course"
+            element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
+          />
+          <Route
+            path="/courses"
+            element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
+          />
+        </Routes>
       </main>
     </div>
   );

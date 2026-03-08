@@ -1,4 +1,5 @@
 import type { ApiResponse } from "../../interfaces/api.interface";
+import { Link } from "react-router-dom";
 import { Card } from "../CourseCard";
 import "./availableCourseList.css";
 
@@ -14,12 +15,17 @@ export function AvailableCourseList(props: CourseCardProps) {
       <h1>Available Course List</h1>
       <div className="available-course-cards-list">
         {course?.map((c) => (
-          <Card
+          <Link
             key={c.id}
-            lesson={c.videos ? c.videos[0] : undefined}
-            title={c.name}
-            showDuration={false}
-          />
+            className="available-course-card-link"
+            to={`/courses?courseId=${c.id}`}
+          >
+            <Card
+              lesson={c.videos ? c.videos[0] : undefined}
+              title={c.name}
+              showDuration={false}
+            />
+          </Link>
         ))}
       </div>
 

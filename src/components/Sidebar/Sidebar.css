@@ -68,3 +68,12 @@
 .sidebar-component a:hover .sidebar-icon {
   color: #070715;
 }
+
+.sidebar-component a.is-active {
+  color: #070715;
+  background-color: #f6f6f6;
+}
+
+.sidebar-component a.is-active .sidebar-icon {
+  color: #070715;
+}

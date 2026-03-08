@@ -4,14 +4,20 @@ import searchIcon from "../../assets/icons/search.svg";
 import notificationIcon from "../../assets/icons/notification.svg";
 import chatIcon from "../../assets/icons/chat.svg";
 import arrowLeftIcon from "../../assets/icons/arrow-left.svg";
+import { Link, useLocation } from "react-router-dom";
 
 export function Header() {
+  const { pathname } = useLocation();
+  const shouldShowBackButton = pathname !== "/";
+
   return (
     <header className="header-component">
-      <a href="#" className="back-link">
-        <img src={arrowLeftIcon} alt="ícone de voltar" width={20} />
-        Back
-      </a>
+      {shouldShowBackButton && (
+        <Link to="/" className="back-link">
+          <img src={arrowLeftIcon} alt="icone de voltar" width={20} />
+          Back
+        </Link>
+      )}
       <div className="header-right">
         <div className="search-input-wrapper">
           <img
