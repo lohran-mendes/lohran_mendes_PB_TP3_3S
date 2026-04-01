@@ -6,12 +6,24 @@ import chatIcon from "../../assets/icons/chat.svg";
 import arrowLeftIcon from "../../assets/icons/arrow-left.svg";
 import { Link, useLocation } from "react-router-dom";
 
-export function Header() {
+type HeaderProps = {
+  onMenuClick: () => void;
+};
+
+export function Header({ onMenuClick }: HeaderProps) {
   const { pathname } = useLocation();
   const shouldShowBackButton = pathname !== "/";
 
   return (
     <header className="header-component">
+      <button
+        className="hamburger-btn"
+        onClick={onMenuClick}
+        aria-label="Abrir menu"
+        type="button"
+      >
+        <span className="hamburger-icon" />
+      </button>
       {shouldShowBackButton && (
         <Link to="/" className="back-link">
           <img src={arrowLeftIcon} alt="icone de voltar" width={20} />

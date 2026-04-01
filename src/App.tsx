@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components/Header";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Route, Routes, useSearchParams } from "react-router-dom";
 import type {
   ApiResponse,
@@ -112,10 +112,23 @@ function App() {
     fetchData();
   }, []);
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = useCallback(() => {
+    setSidebarOpen((prev) => !prev);
+  }, []);
+
+  const closeSidebar = useCallback(() => {
+    setSidebarOpen(false);
+  }, []);
+
   return (
     <div className="app-layout">
-      <Header />
-      <Sidebar />
+      <Header onMenuClick={toggleSidebar} />
+      {sidebarOpen && (
+        <div className="sidebar-overlay" onClick={closeSidebar} />
+      )}
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
       <main>
         <Routes>
           <Route

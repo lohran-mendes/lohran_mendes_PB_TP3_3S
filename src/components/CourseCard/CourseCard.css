@@ -48,7 +48,13 @@
 }
 
 .course-card h3 {
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-size: clamp(0.875rem, 2vw, 1.25rem);
   font-weight: 600;
-  padding: 0 15px 15px;
+  padding: 0 12px 12px;
+}
+
+@media (min-width: 768px) {
+  .course-card h3 {
+    padding: 0 15px 15px;
+  }
 }

@@ -2,12 +2,37 @@
   min-height: 100vh;
 }
 
-.app-layout main {
-  max-width: 1100px;
-}
-
 .app-layout main,
 .app-layout header {
-  padding: 20px;
-  margin-left: 250px;
+  padding: 16px;
+  margin-left: 0;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 40;
+}
+
+@media (min-width: 768px) {
+  .app-layout main,
+  .app-layout header {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-layout main,
+  .app-layout header {
+    margin-left: 250px;
+  }
+
+  .app-layout main {
+    max-width: 1100px;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
 }

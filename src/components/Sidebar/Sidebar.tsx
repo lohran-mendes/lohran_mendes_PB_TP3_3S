@@ -7,14 +7,32 @@ import logoutIcon from "../../assets/icons/logout.svg?raw";
 import bookIcon from "../../assets/icons/book.svg?raw";
 import coursesSearchIcon from "../../assets/icons/courses.svg?raw";
 import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
-export function Sidebar() {
+type SidebarProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { pathname } = useLocation();
   const isAvailableCoursesActive = pathname === "/";
   const isMyCoursesActive = pathname === "/course" || pathname === "/courses";
 
+  useEffect(() => {
+    onClose();
+  }, [pathname]);
+
   return (
-    <div className="sidebar-component">
+    <div className={`sidebar-component${isOpen ? " sidebar-open" : ""}`}>
+      <button
+        className="sidebar-close-btn"
+        onClick={onClose}
+        aria-label="Fechar menu"
+        type="button"
+      >
+        &times;
+      </button>
       <h2>LearnFlix</h2>
       <ul>
         <li>

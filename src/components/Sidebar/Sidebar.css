@@ -3,12 +3,36 @@
   left: 0;
   top: 0;
   height: 100vh;
+  height: 100dvh;
   width: 250px;
   background-color: #ffffff;
   padding: 20px 20px 20px 0;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  z-index: 50;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.sidebar-component.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar-close-btn {
+  display: flex;
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px 12px;
+  margin-bottom: 8px;
+  color: #909090;
+}
+
+.sidebar-close-btn:hover {
+  color: #070715;
 }
 
 .sidebar-component h2 {
@@ -76,4 +100,15 @@
 
 .sidebar-component a.is-active .sidebar-icon {
   color: #070715;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-component {
+    transform: translateX(0);
+    transition: none;
+  }
+
+  .sidebar-close-btn {
+    display: none;
+  }
 }
