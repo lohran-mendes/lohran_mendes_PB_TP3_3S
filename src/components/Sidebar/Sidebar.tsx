@@ -5,7 +5,6 @@ import gearIcon from "../../assets/icons/gear.svg?raw";
 import graduationHatIcon from "../../assets/icons/graduation-hat.svg?raw";
 import logoutIcon from "../../assets/icons/logout.svg?raw";
 import bookIcon from "../../assets/icons/book.svg?raw";
-import coursesSearchIcon from "../../assets/icons/courses.svg?raw";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";

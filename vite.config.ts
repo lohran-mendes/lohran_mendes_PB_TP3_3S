@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/lohran_mendes_PB_TP_4S/',
   plugins: [react()],
   test: {
     globals: true,
