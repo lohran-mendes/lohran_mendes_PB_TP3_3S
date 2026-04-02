@@ -81,12 +81,19 @@ export function clearSession(): void {
   localStorage.removeItem(SESSION_KEY);
 }
 
-export function updateUserProfile(userId: string, updates: { profilePhoto: string }): User | null {
+export function updateUserProfile(userId: string, updates: { profilePhoto?: string | null; fullName?: string }): User | null {
   const users = getUsers();
   const index = users.findIndex((u) => u.id === userId);
   if (index === -1) return null;
 
-  users[index] = { ...users[index], ...updates };
+  if (updates.fullName !== undefined) {
+    users[index].fullName = updates.fullName;
+  }
+  if (updates.profilePhoto === null) {
+    delete users[index].profilePhoto;
+  } else if (updates.profilePhoto !== undefined) {
+    users[index].profilePhoto = updates.profilePhoto;
+  }
   saveUsers(users);
 
   const { password: _, ...user } = users[index];

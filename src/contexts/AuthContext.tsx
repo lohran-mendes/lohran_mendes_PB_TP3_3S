@@ -37,6 +37,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  function removeProfilePhoto(): void {
+    if (!user) return;
+    const updated = updateUserProfile(user.id, { profilePhoto: null });
+    if (updated) {
+      setUser(updated);
+    }
+  }
+
+  function updateFullName(name: string): void {
+    if (!user) return;
+    const updated = updateUserProfile(user.id, { fullName: name });
+    if (updated) {
+      setUser(updated);
+    }
+  }
+
   function logout(): void {
     setUser(null);
     clearSession();
@@ -52,6 +68,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         register,
         logout,
         updateProfilePhoto,
+        removeProfilePhoto,
+        updateFullName,
       }}
     >
       {children}

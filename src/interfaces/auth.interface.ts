@@ -16,6 +16,8 @@ export interface AuthContextType {
   register: (data: RegisterData) => RegisterResult;
   logout: () => void;
   updateProfilePhoto: (photo: string) => void;
+  removeProfilePhoto: () => void;
+  updateFullName: (name: string) => void;
 }
 
 export interface RegisterData {

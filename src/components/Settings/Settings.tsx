@@ -3,9 +3,11 @@ import { useAuth } from "../../contexts/AuthContext";
 import "./Settings.css";
 
 export function Settings() {
-  const { user, updateProfilePhoto } = useAuth();
+  const { user, updateProfilePhoto, removeProfilePhoto, updateFullName } = useAuth();
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [cameraError, setCameraError] = useState("");
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [editName, setEditName] = useState("");
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -83,16 +85,65 @@ export function Settings() {
           )}
         </div>
         <div className="profile-info">
-          <h2>{user.fullName}</h2>
+          {isEditingName ? (
+            <form
+              className="edit-name-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const trimmed = editName.trim();
+                if (trimmed) {
+                  updateFullName(trimmed);
+                }
+                setIsEditingName(false);
+              }}
+            >
+              <input
+                type="text"
+                className="edit-name-input"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+                autoFocus
+              />
+              <div className="edit-name-actions">
+                <button type="submit" className="edit-name-save">Salvar</button>
+                <button type="button" className="edit-name-cancel" onClick={() => setIsEditingName(false)}>Cancelar</button>
+              </div>
+            </form>
+          ) : (
+            <div className="name-display">
+              <h2>{user.fullName}</h2>
+              <button
+                type="button"
+                className="edit-name-btn"
+                onClick={() => {
+                  setEditName(user.fullName);
+                  setIsEditingName(true);
+                }}
+              >
+                Editar nome
+              </button>
+            </div>
+          )}
           <p>{user.email}</p>
         </div>
-        <button
-          type="button"
-          className="profile-photo-btn"
-          onClick={openCamera}
-        >
-          Tirar foto
-        </button>
+        <div className="profile-photo-actions">
+          <button
+            type="button"
+            className="profile-photo-btn"
+            onClick={openCamera}
+          >
+            Tirar foto
+          </button>
+          {user.profilePhoto && (
+            <button
+              type="button"
+              className="profile-photo-remove-btn"
+              onClick={removeProfilePhoto}
+            >
+              Apagar foto
+            </button>
+          )}
+        </div>
         {cameraError && <p className="camera-error">{cameraError}</p>}
       </div>
 
