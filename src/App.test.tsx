@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
 import App from './App';
-import { renderWithRouter } from './test-utils';
+import { renderWithRouter, seedMockUser } from './test-utils';
 
 const mockShows = [
   {
@@ -39,11 +39,14 @@ function mockFetchResponses() {
 
 describe('App', () => {
   beforeEach(() => {
+    localStorage.clear();
+    seedMockUser();
     mockFetchResponses();
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
+    localStorage.clear();
   });
 
   it('deve renderizar o Header e o Sidebar', () => {
@@ -57,5 +60,11 @@ describe('App', () => {
     await waitFor(() => {
       expect(screen.getByText('Show de Teste')).toBeInTheDocument();
     });
+  });
+
+  it('deve redirecionar para login quando não autenticado', () => {
+    localStorage.clear();
+    renderWithRouter(<App />, { initialEntries: ['/'] });
+    expect(screen.getByRole('button', { name: 'Entrar' })).toBeInTheDocument();
   });
 });

@@ -8,6 +8,7 @@ import bookIcon from "../../assets/icons/book.svg?raw";
 import coursesSearchIcon from "../../assets/icons/courses.svg?raw";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -15,6 +16,7 @@ type SidebarProps = {
 };
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const { logout } = useAuth();
   const { pathname } = useLocation();
   const isAvailableCoursesActive = pathname === "/";
   const isMyCoursesActive = pathname === "/course" || pathname === "/courses";
@@ -102,14 +104,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           </a>
         </li>
         <li>
-          <a href="">
+          <button type="button" className="sidebar-logout-btn" onClick={logout}>
             <span
               className="sidebar-icon"
               aria-hidden="true"
               dangerouslySetInnerHTML={{ __html: logoutIcon }}
             />
             Logout
-          </a>
+          </button>
         </li>
       </ul>
     </div>

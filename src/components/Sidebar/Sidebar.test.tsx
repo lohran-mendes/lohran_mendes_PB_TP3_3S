@@ -1,9 +1,17 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Sidebar } from './Sidebar';
-import { renderWithRouter } from '../../test-utils';
+import { renderWithRouter, seedMockUser } from '../../test-utils';
 
 describe('Sidebar', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    seedMockUser();
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+  });
   it('deve renderizar o logo LearnFlix', () => {
     renderWithRouter(<Sidebar isOpen={false} onClose={vi.fn()} />);
     expect(screen.getByText('LearnFlix')).toBeInTheDocument();

@@ -1,8 +1,6 @@
 import "./App.css";
 
-import { Sidebar } from "./components/Sidebar";
-import { Header } from "./components/Header";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useSearchParams } from "react-router-dom";
 import type {
   ApiResponse,
@@ -11,6 +9,10 @@ import type {
 } from "./interfaces/api.interface";
 import { CourseList } from "./components/CourseList";
 import { AvailableCourseList } from "./components/availableCourseList";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { AppLayout } from "./components/AppLayout";
 
 type SelectedCoursePageProps = {
   courses: ApiResponse[];
@@ -112,44 +114,31 @@ function App() {
     fetchData();
   }, []);
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = useCallback(() => {
-    setSidebarOpen((prev) => !prev);
-  }, []);
-
-  const closeSidebar = useCallback(() => {
-    setSidebarOpen(false);
-  }, []);
-
   return (
-    <div className="app-layout">
-      <Header onMenuClick={toggleSidebar} />
-      {sidebarOpen && (
-        <div className="sidebar-overlay" onClick={closeSidebar} />
-      )}
-      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
-      <main>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <AvailableCourseList course={courses} />
-              </>
-            }
-          />
-          <Route
-            path="/course"
-            element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
-          />
-          <Route
-            path="/courses"
-            element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
-          />
-        </Routes>
-      </main>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        element={
+          <PrivateRoute>
+            <AppLayout />
+          </PrivateRoute>
+        }
+      >
+        <Route
+          path="/"
+          element={<AvailableCourseList course={courses} />}
+        />
+        <Route
+          path="/course"
+          element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
+        />
+        <Route
+          path="/courses"
+          element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
+        />
+      </Route>
+    </Routes>
   );
 }
 
