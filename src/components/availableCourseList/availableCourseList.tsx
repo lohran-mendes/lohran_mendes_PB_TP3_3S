@@ -1,6 +1,7 @@
 import type { ApiResponse } from "../../interfaces/api.interface";
 import { Link } from "react-router-dom";
 import { Card } from "../CourseCard";
+import { useSearch } from "../../contexts/SearchContext";
 import "./availableCourseList.css";
 
 type CourseCardProps = {
@@ -9,12 +10,26 @@ type CourseCardProps = {
 
 export function AvailableCourseList(props: CourseCardProps) {
   const { course } = props;
+  const { searchQuery } = useSearch();
+
+  const filteredCourses = searchQuery.trim()
+    ? course?.filter((c) =>
+        c.name.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    : course;
 
   return (
     <div className="available-course-list">
       <h1>Available Course List</h1>
+      {searchQuery.trim() && (
+        <p className="search-results-info">
+          {filteredCourses?.length === 0
+            ? `Nenhum curso encontrado para "${searchQuery}"`
+            : `${filteredCourses?.length} curso(s) encontrado(s) para "${searchQuery}"`}
+        </p>
+      )}
       <div className="available-course-cards-list">
-        {course?.map((c) => (
+        {filteredCourses?.map((c) => (
           <Link
             key={c.id}
             className="available-course-card-link"
@@ -28,8 +43,6 @@ export function AvailableCourseList(props: CourseCardProps) {
           </Link>
         ))}
       </div>
-
-      {/* Aqui você pode adicionar a lógica para exibir a lista de cursos disponíveis */}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import notificationIcon from "../../assets/icons/notification.svg";
 import chatIcon from "../../assets/icons/chat.svg";
 import arrowLeftIcon from "../../assets/icons/arrow-left.svg";
 import { Link, useLocation } from "react-router-dom";
+import { useSearch } from "../../contexts/SearchContext";
 
 type HeaderProps = {
   onMenuClick: () => void;
@@ -13,6 +14,7 @@ type HeaderProps = {
 export function Header({ onMenuClick }: HeaderProps) {
   const { pathname } = useLocation();
   const shouldShowBackButton = pathname !== "/";
+  const { searchQuery, setSearchQuery } = useSearch();
 
   return (
     <header className="header-component">
@@ -39,7 +41,14 @@ export function Header({ onMenuClick }: HeaderProps) {
             className="search-icon"
             aria-hidden="true"
           />
-          <input type="text" placeholder="Search..." className="search-bar" />
+          <input
+            type="text"
+            placeholder="Search..."
+            className="search-bar"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Buscar cursos"
+          />
         </div>
         <div className="container-icon">
           <img
