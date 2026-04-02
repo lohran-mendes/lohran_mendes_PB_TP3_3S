@@ -13,6 +13,7 @@ import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { AppLayout } from "./components/AppLayout";
+import { Settings } from "./components/Settings";
 
 type SelectedCoursePageProps = {
   courses: ApiResponse[];
@@ -137,6 +138,7 @@ function App() {
           path="/courses"
           element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
         />
+        <Route path="/settings" element={<Settings />} />
       </Route>
     </Routes>
   );

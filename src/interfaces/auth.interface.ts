@@ -2,6 +2,7 @@ export interface User {
   id: string;
   email: string;
   fullName: string;
+  profilePhoto?: string;
 }
 
 export interface StoredUser extends User {
@@ -14,6 +15,7 @@ export interface AuthContextType {
   login: (email: string, password: string) => LoginResult;
   register: (data: RegisterData) => RegisterResult;
   logout: () => void;
+  updateProfilePhoto: (photo: string) => void;
 }
 
 export interface RegisterData {

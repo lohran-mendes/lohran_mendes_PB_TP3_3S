@@ -7,6 +7,7 @@ import {
   getSession,
   registerUser,
   saveSession,
+  updateUserProfile,
 } from "../services/auth.service";
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -28,6 +29,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return registerUser(data);
   }
 
+  function updateProfilePhoto(photo: string): void {
+    if (!user) return;
+    const updated = updateUserProfile(user.id, { profilePhoto: photo });
+    if (updated) {
+      setUser(updated);
+    }
+  }
+
   function logout(): void {
     setUser(null);
     clearSession();
@@ -42,6 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         register,
         logout,
+        updateProfilePhoto,
       }}
     >
       {children}

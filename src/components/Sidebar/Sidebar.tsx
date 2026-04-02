@@ -20,6 +20,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { pathname } = useLocation();
   const isAvailableCoursesActive = pathname === "/";
   const isMyCoursesActive = pathname === "/course" || pathname === "/courses";
+  const isSettingsActive = pathname === "/settings";
 
   useEffect(() => {
     onClose();
@@ -94,14 +95,17 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           </a>
         </li>
         <li>
-          <a href="">
+          <Link
+            to="/settings"
+            className={isSettingsActive ? "is-active" : undefined}
+          >
             <span
               className="sidebar-icon"
               aria-hidden="true"
               dangerouslySetInnerHTML={{ __html: gearIcon }}
             />
             Settings
-          </a>
+          </Link>
         </li>
         <li>
           <button type="button" className="sidebar-logout-btn" onClick={logout}>

@@ -1,0 +1,153 @@
+.settings-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.settings-page h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #070715;
+  margin: 0 0 2rem;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 3px solid #e0e0e0;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-avatar-placeholder {
+  color: #bbb;
+  font-size: 3rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-info h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #070715;
+  margin: 0 0 0.25rem;
+}
+
+.profile-info p {
+  font-size: 0.9375rem;
+  color: #666;
+  margin: 0;
+}
+
+.profile-photo-btn {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #070715;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.profile-photo-btn:hover {
+  background-color: #1a1a2e;
+}
+
+.camera-error {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin: 0;
+  text-align: center;
+}
+
+.camera-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.camera-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 90vw;
+}
+
+.camera-modal video {
+  width: 320px;
+  max-width: 100%;
+  border-radius: 8px;
+  background: #000;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.camera-capture-btn {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #070715;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.camera-capture-btn:hover {
+  background-color: #1a1a2e;
+}
+
+.camera-cancel-btn {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #666;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.camera-cancel-btn:hover {
+  background-color: #e0e0e0;
+}
