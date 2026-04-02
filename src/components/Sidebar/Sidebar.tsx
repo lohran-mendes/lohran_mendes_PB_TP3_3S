@@ -19,7 +19,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { logout } = useAuth();
   const { pathname } = useLocation();
   const isAvailableCoursesActive = pathname === "/";
-  const isMyCoursesActive = pathname === "/course" || pathname === "/courses";
+  const isMyCoursesActive = pathname === "/my-courses";
   const isSettingsActive = pathname === "/settings";
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </li>
         <li>
           <Link
-            to="/courses"
+            to="/my-courses"
             className={isMyCoursesActive ? "is-active" : undefined}
           >
             <span
@@ -82,16 +82,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               dangerouslySetInnerHTML={{ __html: bookIcon }}
             />
             Library
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <span
-              className="sidebar-icon"
-              aria-hidden="true"
-              dangerouslySetInnerHTML={{ __html: coursesSearchIcon }}
-            />
-            Available courses
           </a>
         </li>
         <li>

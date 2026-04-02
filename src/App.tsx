@@ -9,11 +9,14 @@ import type {
 } from "./interfaces/api.interface";
 import { CourseList } from "./components/CourseList";
 import { AvailableCourseList } from "./components/availableCourseList";
+import { MyCourses } from "./components/MyCourses";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { AppLayout } from "./components/AppLayout";
 import { Settings } from "./components/Settings";
+import { CourseProvider } from "./contexts/CourseContext";
+import { useCourses } from "./contexts/CourseContext";
 
 type SelectedCoursePageProps = {
   courses: ApiResponse[];
@@ -23,6 +26,7 @@ type SelectedCoursePageProps = {
 function SelectedCoursePage(props: SelectedCoursePageProps) {
   const { courses, isLoading } = props;
   const [searchParams] = useSearchParams();
+  const { isEnrolled, enroll, unenroll } = useCourses();
   const courseIdParam = searchParams.get("courseId");
   const selectedCourseId = Number(courseIdParam);
 
@@ -31,7 +35,7 @@ function SelectedCoursePage(props: SelectedCoursePageProps) {
   }
 
   if (!courseIdParam || Number.isNaN(selectedCourseId)) {
-    return <p>Você ainda não salvou nenhum curso para a sua lista de favoritos.</p>;
+    return <p>Selecione um curso para ver os detalhes.</p>;
   }
 
   const selectedCourse = courses.find((course) => course.id === selectedCourseId);
@@ -40,7 +44,24 @@ function SelectedCoursePage(props: SelectedCoursePageProps) {
     return <p>Course not found.</p>;
   }
 
-  return <CourseList courses={[selectedCourse]} />;
+  const enrolled = isEnrolled(selectedCourse.id);
+
+  return (
+    <div>
+      <div className="course-enroll-header">
+        <button
+          type="button"
+          className={`enroll-btn ${enrolled ? "enrolled" : ""}`}
+          onClick={() =>
+            enrolled ? unenroll(selectedCourse.id) : enroll(selectedCourse.id)
+          }
+        >
+          {enrolled ? "Cancelar inscrição" : "Inscrever-se"}
+        </button>
+      </div>
+      <CourseList courses={[selectedCourse]} />
+    </div>
+  );
 }
 
 function App() {
@@ -116,31 +137,37 @@ function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route
-        element={
-          <PrivateRoute>
-            <AppLayout />
-          </PrivateRoute>
-        }
-      >
+    <CourseProvider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
-          path="/"
-          element={<AvailableCourseList course={courses} />}
-        />
-        <Route
-          path="/course"
-          element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
-        />
-        <Route
-          path="/courses"
-          element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
-        />
-        <Route path="/settings" element={<Settings />} />
-      </Route>
-    </Routes>
+          element={
+            <PrivateRoute>
+              <AppLayout />
+            </PrivateRoute>
+          }
+        >
+          <Route
+            path="/"
+            element={<AvailableCourseList course={courses} />}
+          />
+          <Route
+            path="/course"
+            element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
+          />
+          <Route
+            path="/courses"
+            element={<SelectedCoursePage courses={courses} isLoading={isLoading} />}
+          />
+          <Route
+            path="/my-courses"
+            element={<MyCourses courses={courses} isLoading={isLoading} />}
+          />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+      </Routes>
+    </CourseProvider>
   );
 }
 

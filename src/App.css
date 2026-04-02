@@ -36,3 +36,34 @@
     display: none;
   }
 }
+
+.course-enroll-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.enroll-btn {
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  background-color: #fff;
+  color: #000;
+}
+
+.enroll-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.enroll-btn.enrolled {
+  background-color: #000;
+  color: #fff;
+}
+
+.enroll-btn.enrolled:hover {
+  background-color: #222;
+}

@@ -1,0 +1,65 @@
+.my-courses h1 {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.my-courses .my-courses-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .my-courses .my-courses-list {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 70px;
+  }
+}
+
+.my-courses .my-course-card-link {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
+.my-courses .my-course-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-courses .unenroll-btn {
+  margin-top: 8px;
+  padding: 10px 24px;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.my-courses .unenroll-btn:hover {
+  background-color: #222;
+}
+
+.my-courses .browse-courses-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 24px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.my-courses .browse-courses-link:hover {
+  background-color: #f0f0f0;
+}
